@@ -295,11 +295,11 @@ public enum Stickers {
             path.addEllipse(in: r.insetBy(dx: r.width * 0.26, dy: r.height * 0.26))
             for i in 0..<12 {
                 let a = Double(i) * .pi / 6
-                let inner = 0.33, outer = 0.5, w = 0.045
-                let points = [(a - w, inner), (a, outer), (a + w, inner)].map { angle, radius in
+                let inner: Double = 0.33, outer: Double = 0.5, w: Double = 0.045
+                func point(_ angle: Double, _ radius: Double) -> CGPoint {
                     CGPoint(x: r.midX + cos(angle) * radius * r.width, y: r.midY + sin(angle) * radius * r.height)
                 }
-                path.addLines(between: points)
+                path.addLines(between: [point(a - w, inner), point(a, outer), point(a + w, inner)])
                 path.closeSubpath()
             }
             return path

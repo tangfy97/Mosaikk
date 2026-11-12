@@ -121,8 +121,9 @@ public enum Templates {
         add("single", .grid, c)
         for n in 2...25 {
             // Even grids: the most square arrangement first, then the others.
-            let shapes = (1...n).filter { n % $0 == 0 }.map { ($0, n / $0) }
-                .sorted { abs($0.0 - $0.1) < abs($1.0 - $1.1) }
+            var shapes: [(cols: Int, rows: Int)] = []
+            for cols in 1...n where n % cols == 0 { shapes.append((cols, n / cols)) }
+            shapes.sort { (a: (cols: Int, rows: Int), b: (cols: Int, rows: Int)) -> Bool in abs(a.cols - a.rows) < abs(b.cols - b.rows) }
             for (cols, rows) in shapes where cols <= 6 && rows <= 6 {
                 add("grid-\(n)-\(cols)x\(rows)", .grid, .column(Array(repeating: row(cols), count: rows)))
             }
