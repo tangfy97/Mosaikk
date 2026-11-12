@@ -1,0 +1,637 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E403561513E4751249B5BB2 /* Filmstrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D1326E8FDCB8A1AB97F728 /* Filmstrip.swift */; };
+		24350D1F3960D68197F08FD5 /* AtelierDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A020FCE5BCFD4E719735D /* AtelierDocument.swift */; };
+		2BB36ED6FD9A073F87D09C26 /* AtelierCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB2A93CAEEDDAC49862AB2 /* AtelierCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E8CA082181757155A675077 /* CollageAtelierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F5FC2EB53E13053F3F1D7D /* CollageAtelierApp.swift */; };
+		34CF879E82EC5B1272429BD1 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A28375DEE6477739825264 /* EditorView.swift */; };
+		4C090C01454BB8AD21F3DEB1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 20883D48B4EE4D08DA16CCAB /* PrivacyInfo.xcprivacy */; };
+		89CB6FAC9E53D935EDC4A2B3 /* AtelierCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB2A93CAEEDDAC49862AB2 /* AtelierCore.framework */; };
+		AD5CE23FBB0D8059FD49DCC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B546304D21AEFBDE0214209 /* Assets.xcassets */; };
+		BB39F6307E28D06E65F6DBCA /* ProjectArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6190A38F03737A2E0638142A /* ProjectArchive.swift */; };
+		C49250D823FF168FAF92E97D /* LayoutEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A371E6DB8AF9C6B4F2AD5 /* LayoutEngine.swift */; };
+		CF14166F8202913B573DBCBC /* EditorSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84F02F3A61D8A701A59439 /* EditorSession.swift */; };
+		CFE21CA4489AFC331280364A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016E0D614A9661F0D284429C /* Project.swift */; };
+		D2E79DA3CDE31BEDA23B48FB /* InspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DA62B5E6C70816633F056F /* InspectorView.swift */; };
+		DAED3E81B95BBC1B107445CC /* ExportSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3E4CC935CE4A84A7D9EC4 /* ExportSheet.swift */; };
+		E691A6599CCC802321355843 /* ImagePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB913F607AD6F30A3B302EB /* ImagePipeline.swift */; };
+		EB0ED4EB17E19C5CFE702370 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9372E586413DB9EF000F3A2 /* Theme.swift */; };
+		F8E49C3329E7C5886D53FB53 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2168E66B5677E0D5AB9616 /* CanvasView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		721EDEDEBF8EE66431DE9811 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 613DBBED1FA62B5003B10BF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3A67BC6B1DB95C64EA1BA3B;
+			remoteInfo = AtelierCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B621E06EECC3AB23D1365716 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2BB36ED6FD9A073F87D09C26 /* AtelierCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		016E0D614A9661F0D284429C /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		11A28375DEE6477739825264 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		136A020FCE5BCFD4E719735D /* AtelierDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtelierDocument.swift; sourceTree = "<group>"; };
+		20883D48B4EE4D08DA16CCAB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		4CEB2A93CAEEDDAC49862AB2 /* AtelierCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AtelierCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FB913F607AD6F30A3B302EB /* ImagePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePipeline.swift; sourceTree = "<group>"; };
+		52D1326E8FDCB8A1AB97F728 /* Filmstrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filmstrip.swift; sourceTree = "<group>"; };
+		5B546304D21AEFBDE0214209 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6190A38F03737A2E0638142A /* ProjectArchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectArchive.swift; sourceTree = "<group>"; };
+		97DA62B5E6C70816633F056F /* InspectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorView.swift; sourceTree = "<group>"; };
+		9D2168E66B5677E0D5AB9616 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		A4F5FC2EB53E13053F3F1D7D /* CollageAtelierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageAtelierApp.swift; sourceTree = "<group>"; };
+		B92A371E6DB8AF9C6B4F2AD5 /* LayoutEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutEngine.swift; sourceTree = "<group>"; };
+		C9372E586413DB9EF000F3A2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D1B3E4CC935CE4A84A7D9EC4 /* ExportSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSheet.swift; sourceTree = "<group>"; };
+		ED84F02F3A61D8A701A59439 /* EditorSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorSession.swift; sourceTree = "<group>"; };
+		EFCC6BFDDBB1E6825600B606 /* CollageAtelier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollageAtelier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5DFEE36BC9B1B1C957F8E5C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89CB6FAC9E53D935EDC4A2B3 /* AtelierCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0AC3200DC33636CEDA94D060 /* AtelierCore */ = {
+			isa = PBXGroup;
+			children = (
+				4FB913F607AD6F30A3B302EB /* ImagePipeline.swift */,
+				B92A371E6DB8AF9C6B4F2AD5 /* LayoutEngine.swift */,
+				016E0D614A9661F0D284429C /* Project.swift */,
+				6190A38F03737A2E0638142A /* ProjectArchive.swift */,
+			);
+			name = AtelierCore;
+			path = Sources/AtelierCore;
+			sourceTree = "<group>";
+		};
+		6C6D963735842046F7D6D69C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5B546304D21AEFBDE0214209 /* Assets.xcassets */,
+				20883D48B4EE4D08DA16CCAB /* PrivacyInfo.xcprivacy */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B80AADA8BE401205F39DCB64 /* AtelierApp */ = {
+			isa = PBXGroup;
+			children = (
+				136A020FCE5BCFD4E719735D /* AtelierDocument.swift */,
+				9D2168E66B5677E0D5AB9616 /* CanvasView.swift */,
+				A4F5FC2EB53E13053F3F1D7D /* CollageAtelierApp.swift */,
+				ED84F02F3A61D8A701A59439 /* EditorSession.swift */,
+				11A28375DEE6477739825264 /* EditorView.swift */,
+				D1B3E4CC935CE4A84A7D9EC4 /* ExportSheet.swift */,
+				52D1326E8FDCB8A1AB97F728 /* Filmstrip.swift */,
+				97DA62B5E6C70816633F056F /* InspectorView.swift */,
+				C9372E586413DB9EF000F3A2 /* Theme.swift */,
+			);
+			name = AtelierApp;
+			path = Sources/AtelierApp;
+			sourceTree = "<group>";
+		};
+		CFCA3ACDDDABD132343A01F4 = {
+			isa = PBXGroup;
+			children = (
+				6C6D963735842046F7D6D69C /* App */,
+				B80AADA8BE401205F39DCB64 /* AtelierApp */,
+				0AC3200DC33636CEDA94D060 /* AtelierCore */,
+				F78F59164FF3C33F8865252C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F78F59164FF3C33F8865252C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4CEB2A93CAEEDDAC49862AB2 /* AtelierCore.framework */,
+				EFCC6BFDDBB1E6825600B606 /* CollageAtelier.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1ADE56B7B5382DBB41BB0AC8 /* CollageAtelier */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5FA2DCB66DFD7D0C927EDF7 /* Build configuration list for PBXNativeTarget "CollageAtelier" */;
+			buildPhases = (
+				A086614AD3B4514DCBFA83FC /* Sources */,
+				9169CDB90140CB0B5E7574E2 /* Resources */,
+				5DFEE36BC9B1B1C957F8E5C6 /* Frameworks */,
+				B621E06EECC3AB23D1365716 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				612FEE60DB892DB1984EEE22 /* PBXTargetDependency */,
+			);
+			name = CollageAtelier;
+			packageProductDependencies = (
+			);
+			productName = CollageAtelier;
+			productReference = EFCC6BFDDBB1E6825600B606 /* CollageAtelier.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B3A67BC6B1DB95C64EA1BA3B /* AtelierCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 328B7DDBE08F0FC2AE6B382A /* Build configuration list for PBXNativeTarget "AtelierCore" */;
+			buildPhases = (
+				7FEABFD46C2E4A3067C196E6 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AtelierCore;
+			packageProductDependencies = (
+			);
+			productName = AtelierCore;
+			productReference = 4CEB2A93CAEEDDAC49862AB2 /* AtelierCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		613DBBED1FA62B5003B10BF1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1ADE56B7B5382DBB41BB0AC8 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					B3A67BC6B1DB95C64EA1BA3B = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = E919851C640A4AFEF623F700 /* Build configuration list for PBXProject "CollageAtelier" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CFCA3ACDDDABD132343A01F4;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F78F59164FF3C33F8865252C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B3A67BC6B1DB95C64EA1BA3B /* AtelierCore */,
+				1ADE56B7B5382DBB41BB0AC8 /* CollageAtelier */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9169CDB90140CB0B5E7574E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5CE23FBB0D8059FD49DCC7 /* Assets.xcassets in Resources */,
+				4C090C01454BB8AD21F3DEB1 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7FEABFD46C2E4A3067C196E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E691A6599CCC802321355843 /* ImagePipeline.swift in Sources */,
+				C49250D823FF168FAF92E97D /* LayoutEngine.swift in Sources */,
+				CFE21CA4489AFC331280364A /* Project.swift in Sources */,
+				BB39F6307E28D06E65F6DBCA /* ProjectArchive.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A086614AD3B4514DCBFA83FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24350D1F3960D68197F08FD5 /* AtelierDocument.swift in Sources */,
+				F8E49C3329E7C5886D53FB53 /* CanvasView.swift in Sources */,
+				2E8CA082181757155A675077 /* CollageAtelierApp.swift in Sources */,
+				CF14166F8202913B573DBCBC /* EditorSession.swift in Sources */,
+				34CF879E82EC5B1272429BD1 /* EditorView.swift in Sources */,
+				DAED3E81B95BBC1B107445CC /* ExportSheet.swift in Sources */,
+				0E403561513E4751249B5BB2 /* Filmstrip.swift in Sources */,
+				D2E79DA3CDE31BEDA23B48FB /* InspectorView.swift in Sources */,
+				EB0ED4EB17E19C5CFE702370 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		612FEE60DB892DB1984EEE22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B3A67BC6B1DB95C64EA1BA3B /* AtelierCore */;
+			targetProxy = 721EDEDEBF8EE66431DE9811 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		13007FB157A8F74752F28B6F /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.feiyang.collageatelier.core;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = AppStore;
+		};
+		5D4D47A7A8D6E88F8276A118 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.feiyang.collageatelier.core;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		60C877F364CADC26B5E1E6D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		95B42DF8D346EB88E9FF8389 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		B8D034871109C507A102C39D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.feiyang.collageatelier.core;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		C50CF840830AD6922EEFF54A /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/CollageAtelier.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.feiyang.collageatelier;
+				PRODUCT_NAME = "Collage Atelier";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
+			};
+			name = AppStore;
+		};
+		C89B595056D55C1C978DCFAF /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = AppStore;
+		};
+		E75565803D5B6CA1EAD296A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/CollageAtelier.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.feiyang.collageatelier;
+				PRODUCT_NAME = "Collage Atelier";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FD80E51FEAC540700A14811E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/CollageAtelier.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.feiyang.collageatelier;
+				PRODUCT_NAME = "Collage Atelier";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		328B7DDBE08F0FC2AE6B382A /* Build configuration list for PBXNativeTarget "AtelierCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13007FB157A8F74752F28B6F /* AppStore */,
+				B8D034871109C507A102C39D /* Debug */,
+				5D4D47A7A8D6E88F8276A118 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = AppStore;
+		};
+		E5FA2DCB66DFD7D0C927EDF7 /* Build configuration list for PBXNativeTarget "CollageAtelier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C50CF840830AD6922EEFF54A /* AppStore */,
+				E75565803D5B6CA1EAD296A0 /* Debug */,
+				FD80E51FEAC540700A14811E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = AppStore;
+		};
+		E919851C640A4AFEF623F700 /* Build configuration list for PBXProject "CollageAtelier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C89B595056D55C1C978DCFAF /* AppStore */,
+				60C877F364CADC26B5E1E6D2 /* Debug */,
+				95B42DF8D346EB88E9FF8389 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = AppStore;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 613DBBED1FA62B5003B10BF1 /* Project object */;
+}

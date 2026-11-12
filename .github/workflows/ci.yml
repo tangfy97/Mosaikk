@@ -1,0 +1,20 @@
+name: Mac app
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test document, layout, and renderer
+        run: bash scripts/test.sh
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Build app
+        run: xcodebuild -project CollageAtelier.xcodeproj -scheme CollageAtelier -configuration Release -destination 'platform=macOS' -derivedDataPath build/Xcode CODE_SIGNING_ALLOWED=NO build
