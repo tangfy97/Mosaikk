@@ -168,6 +168,8 @@ T = {
 "Medium": ("中", "中"),
 "Memories": ("回忆", "回憶"),
 "Mono": ("单色", "單色"),
+"Contact Support": ("联系支持", "聯絡支援"),
+"Check for a New Version…": ("检查新版本…", "檢查新版本⋯"),
 "Mosaikk Website": ("Mosaikk 网站", "Mosaikk 網站"),
 "Move": ("移动", "移動"),
 "Move Photo": ("移动照片", "移動照片"),

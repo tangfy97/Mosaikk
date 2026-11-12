@@ -11,4 +11,12 @@ python3 -I scripts/fill_xliff.py build/loc
 for language in zh-Hans zh-Hant en-GB; do
     xcodebuild -importLocalizations -project Mosaikk.xcodeproj -localizationPath build/loc/$language.xcloc -quiet
 done
+# Drop entries that are no longer in the code, and the empty key.
+python3 -I - <<'PY'
+import json
+path = "Resources/Localizable.xcstrings"
+catalog = json.load(open(path))
+catalog["strings"] = {k: v for k, v in catalog["strings"].items() if k and v.get("extractionState") != "stale"}
+json.dump(catalog, open(path, "w"), ensure_ascii=False, indent=2, sort_keys=True)
+PY
 echo "Updated Resources/Localizable.xcstrings"

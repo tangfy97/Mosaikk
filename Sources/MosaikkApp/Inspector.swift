@@ -218,7 +218,7 @@ struct DimensionField: View {
     @State private var text = ""
 
     var body: some View {
-        TextField("", text: $text)
+        TextField(String(), text: $text)
             .textFieldStyle(.roundedBorder)
             .multilineTextAlignment(.trailing)
             .monospacedDigit()

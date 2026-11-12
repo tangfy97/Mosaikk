@@ -110,6 +110,11 @@ struct MosaikkCommands: Commands {
         CommandGroup(replacing: .help) {
             Link("Mosaikk Website", destination: Links.website)
             Link("Support & Privacy", destination: Links.support)
+            Link("Contact Support", destination: Links.contact)
+            #if !APPSTORE
+            Divider()
+            Link("Check for a New Version…", destination: Links.newVersion)
+            #endif
         }
     }
 
@@ -178,7 +183,26 @@ enum TemporaryFiles {
     }
 }
 
+/// Pages on tang-spark.no, in the language the app is running in. They open in the browser; Mosaikk itself never goes online.
 enum Links {
-    static let website = URL(string: "https://tang-spark.no/mosaikk.html")!
-    static let support = URL(string: "https://tang-spark.no/mosaikk.html#support")!
+    private static var pageSuffix: String {
+        switch Bundle.main.preferredLocalizations.first {
+        case "zh-Hans": "-zh-cn"
+        case "zh-Hant": "-zh-tw"
+        default: ""
+        }
+    }
+
+    static var website: URL { URL(string: "https://tang-spark.no/mosaikk\(pageSuffix).html")! }
+    static var support: URL { URL(string: "https://tang-spark.no/mosaikk-support\(pageSuffix).html")! }
+    static let contact = URL(string: "mailto:support@tang-spark.no?subject=Mosaikk")!
+
+    #if !APPSTORE
+    /// The download page compares the installed version it is given with the latest one.
+    /// The App Store version is updated by the App Store, so it has no such link.
+    static var newVersion: URL {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        return URL(string: "https://tang-spark.no/mosaikk\(pageSuffix).html?installed=\(version)#download")!
+    }
+    #endif
 }

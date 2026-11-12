@@ -1503,6 +1503,28 @@
         }
       }
     },
+    "Check for a New Version…": {
+      "localizations": {
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check for a New Version…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查新版本…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查新版本⋯"
+          }
+        }
+      }
+    },
     "Checks": {
       "localizations": {
         "en-GB": {
@@ -1697,6 +1719,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "彩紙"
+          }
+        }
+      }
+    },
+    "Contact Support": {
+      "localizations": {
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contact Support"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "联系支持"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "聯絡支援"
           }
         }
       }

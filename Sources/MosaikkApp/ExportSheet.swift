@@ -54,7 +54,7 @@ struct ExportSheet: View {
                 if size == .custom {
                     LabeledContent("Longer Side") {
                         HStack(spacing: 4) {
-                            TextField("", value: $custom, format: .number.grouping(.never))
+                            TextField(String(), value: $custom, format: .number.grouping(.never))
                                 .textFieldStyle(.roundedBorder)
                                 .multilineTextAlignment(.trailing)
                                 .frame(width: 70)

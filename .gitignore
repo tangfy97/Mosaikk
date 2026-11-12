@@ -11,3 +11,4 @@ xcuserdata/
 *.mobileprovision
 *.provisionprofile
 .env
+website/dist/

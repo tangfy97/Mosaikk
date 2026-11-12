@@ -72,6 +72,12 @@ for config in Release AppStore; do
   [[ $entitlements != *com.apple.security.network* ]] && pass "no network entitlement" || fail "has a network entitlement"
   [[ $entitlements != *com.apple.security.temporary-exception* ]] && pass "no temporary exceptions" || fail "has temporary exceptions"
 
+  links=$(strings $app/Contents/MacOS/Mosaikk)
+  if [[ $config == AppStore ]]; then
+    [[ $links != *"?installed="* ]] && pass "no website update link" || fail "website update link compiled in"
+  else
+    [[ $links == *"?installed="* ]] && pass "Help menu links to the download page" || fail "download page link missing"
+  fi
   /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -u "$PWD/$app" 2>/dev/null
   rm -rf $app
 done
