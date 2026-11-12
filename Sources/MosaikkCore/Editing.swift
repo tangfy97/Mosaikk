@@ -51,7 +51,9 @@ public extension Collage {
     /// Fills every empty cell, preferring pictures that aren't used yet.
     mutating func autoFill() {
         let used = usage
-        var queue = (assets.filter { used[$0.id] == nil } + assets.filter { used[$0.id] != nil }).map(\.id)[...]
+        let unused: [UUID] = assets.filter { used[$0.id] == nil }.map(\.id)
+        let inUse: [UUID] = assets.filter { used[$0.id] != nil }.map(\.id)
+        var queue = (unused + inUse)[...]
         guard !queue.isEmpty else { return }
         for id in emptyCells {
             if queue.isEmpty { queue = assets.map(\.id)[...] }

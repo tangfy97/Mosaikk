@@ -103,7 +103,9 @@ public enum Templates {
 
     public static func template(_ id: String) -> Template? { all.first { $0.id == id } }
 
-    public static let all: [Template] = {
+    public static let all: [Template] = makeAll()
+
+    private static func makeAll() -> [Template] {
         var list: [Template] = []
         var seen = Set<LayoutSpec>()
         func add(_ id: String, _ family: Template.Family, _ spec: LayoutSpec?, overlays: [OverlaySpec] = []) {
@@ -164,24 +166,22 @@ public enum Templates {
             }
         }
         // Mosaics: nested, magazine-like arrangements.
-        let mosaics: [(String, LayoutSpec)] = [
-            ("mosaic-3", .row([c, .column([c, c])], [1, 1])),
-            ("mosaic-4-steps", .column([.row([c, c], [2, 1]), .row([c, c], [1, 2])])),
-            ("mosaic-4-l", .row([.column([c, .row([c, c])], [3, 2]), c], [2, 1])),
-            ("mosaic-5-pinwheel", .column([.row([c, c], [2, 1]), .row([c, c, c], [1, 1, 1]) ], [3, 2])),
-            ("mosaic-5-weave", .row([.column([c, c], [2, 1]), .column([c, c, c], [1, 2, 1])])),
-            ("mosaic-5-cross", .row([.column([c, c]), .column([c], nil), .column([c, c])], [1, 2, 1])),
-            ("mosaic-6-steps", .column([.row([c, c, c], [2, 1, 1]), .row([c, c, c], [1, 1, 2])])),
-            ("mosaic-6-tower", .row([c, .column([.row([c, c]), c, .row([c, c])], [1, 1, 1])], [1, 1])),
-            ("mosaic-6-brick", .column([.row([c, c]), .row([c, c, c], [1, 2, 1]), c], [2, 2, 1.4])),
-            ("mosaic-7-magazine", .row([.column([c, c], [3, 2]), .column([.row([c, c]), c, .row([c, c])], [1, 2, 1])], [1, 1.4])),
-            ("mosaic-7-gallery", .column([.row([c, .column([c, c]), c], [2, 1, 2]), .row([c, c, c])], [3, 2])),
-            ("mosaic-8-staggered", .row([.column([c, c, c], [2, 1, 2]), .column([c, c], [1, 1]), .column([c, c, c], [1, 2, 1])])),
-            ("mosaic-9-collage", .column([.row([c, .column([c, c])], [2, 1]), .row([c, c, c]), .row([.column([c, c]), c], [1, 2])], [2, 1, 2])),
-            ("mosaic-10-wall", .column([.row([c, c, c], [1, 2, 1]), .row([c, c], [2, 1]), .row([c, c, c], [1, 1, 2]), .row([c, c], [1, 2])])),
-            ("mosaic-12-film", .column([.row(Array(repeating: c, count: 4)), .row([c, c], [1, 1]), .row(Array(repeating: c, count: 6))], [1, 2, 0.8])),
-        ]
-        for (id, spec) in mosaics { add(id, .mosaic, spec) }
+        // One statement each: a single large literal is slow for older compilers to type-check.
+        add("mosaic-3", .mosaic, .row([c, .column([c, c])], [1, 1]))
+        add("mosaic-4-steps", .mosaic, .column([.row([c, c], [2, 1]), .row([c, c], [1, 2])]))
+        add("mosaic-4-l", .mosaic, .row([.column([c, .row([c, c])], [3, 2]), c], [2, 1]))
+        add("mosaic-5-pinwheel", .mosaic, .column([.row([c, c], [2, 1]), .row([c, c, c], [1, 1, 1]) ], [3, 2]))
+        add("mosaic-5-weave", .mosaic, .row([.column([c, c], [2, 1]), .column([c, c, c], [1, 2, 1])]))
+        add("mosaic-5-cross", .mosaic, .row([.column([c, c]), .column([c], nil), .column([c, c])], [1, 2, 1]))
+        add("mosaic-6-steps", .mosaic, .column([.row([c, c, c], [2, 1, 1]), .row([c, c, c], [1, 1, 2])]))
+        add("mosaic-6-tower", .mosaic, .row([c, .column([.row([c, c]), c, .row([c, c])], [1, 1, 1])], [1, 1]))
+        add("mosaic-6-brick", .mosaic, .column([.row([c, c]), .row([c, c, c], [1, 2, 1]), c], [2, 2, 1.4]))
+        add("mosaic-7-magazine", .mosaic, .row([.column([c, c], [3, 2]), .column([.row([c, c]), c, .row([c, c])], [1, 2, 1])], [1, 1.4]))
+        add("mosaic-7-gallery", .mosaic, .column([.row([c, .column([c, c]), c], [2, 1, 2]), .row([c, c, c])], [3, 2]))
+        add("mosaic-8-staggered", .mosaic, .row([.column([c, c, c], [2, 1, 2]), .column([c, c], [1, 1]), .column([c, c, c], [1, 2, 1])]))
+        add("mosaic-9-collage", .mosaic, .column([.row([c, .column([c, c])], [2, 1]), .row([c, c, c]), .row([.column([c, c]), c], [1, 2])], [2, 1, 2]))
+        add("mosaic-10-wall", .mosaic, .column([.row([c, c, c], [1, 2, 1]), .row([c, c], [2, 1]), .row([c, c, c], [1, 1, 2]), .row([c, c], [1, 2])]))
+        add("mosaic-12-film", .mosaic, .column([.row(Array(repeating: c, count: 4)), .row([c, c], [1, 1]), .row(Array(repeating: c, count: 6))], [1, 2, 0.8]))
 
         // Shaped frames.
         add("shape-circle", .shapes, .cell(.circle))
@@ -201,7 +201,7 @@ public enum Templates {
 
         add("freeform", .freeform, nil)
         return list
-    }()
+    }
 
     /// Ways to write `n` as an ordered sum of two or more parts.
     static func compositions(of n: Int, maxPart: Int, maxParts: Int) -> [[Int]] {

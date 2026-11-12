@@ -721,17 +721,29 @@ final class CanvasView: NSView, NSTextViewDelegate, NSMenuItemValidation {
             xs += [r.midX]
             ys += [r.midY]
         }
-        let candidatesX = [(center.x, 0.0), (center.x - size.width / 2, size.width / 2), (center.x + size.width / 2, -size.width / 2)]
-        if let best = candidatesX.flatMap({ c in xs.map { ($0, $0 + c.1, abs($0 - c.0)) } }).min(by: { $0.2 < $1.2 }), best.2 < threshold {
-            result.x = best.1
-            guides.append(Guide(from: CGPoint(x: best.0, y: 0), to: CGPoint(x: best.0, y: canvasSize.height)))
+        // Each candidate edge or centre of the item, with the offset from it to the item's centre.
+        let halfW = size.width / 2, halfH = size.height / 2
+        if let best = Self.nearestSnap([(center.x, 0), (center.x - halfW, halfW), (center.x + halfW, -halfW)], to: xs), best.distance < threshold {
+            result.x = best.center
+            guides.append(Guide(from: CGPoint(x: best.line, y: 0), to: CGPoint(x: best.line, y: canvasSize.height)))
         }
-        let candidatesY = [(center.y, 0.0), (center.y - size.height / 2, size.height / 2), (center.y + size.height / 2, -size.height / 2)]
-        if let best = candidatesY.flatMap({ c in ys.map { ($0, $0 + c.1, abs($0 - c.0)) } }).min(by: { $0.2 < $1.2 }), best.2 < threshold {
-            result.y = best.1
-            guides.append(Guide(from: CGPoint(x: 0, y: best.0), to: CGPoint(x: canvasSize.width, y: best.0)))
+        if let best = Self.nearestSnap([(center.y, 0), (center.y - halfH, halfH), (center.y + halfH, -halfH)], to: ys), best.distance < threshold {
+            result.y = best.center
+            guides.append(Guide(from: CGPoint(x: 0, y: best.line), to: CGPoint(x: canvasSize.width, y: best.line)))
         }
         return result
+    }
+
+    private static func nearestSnap(_ candidates: [(position: Double, offset: Double)], to lines: [Double])
+        -> (line: Double, center: Double, distance: Double)? {
+        var best: (line: Double, center: Double, distance: Double)?
+        for candidate in candidates {
+            for line in lines {
+                let distance = abs(line - candidate.position)
+                if distance < (best?.distance ?? .infinity) { best = (line, line + candidate.offset, distance) }
+            }
+        }
+        return best
     }
 
     // MARK: Hover and cursors

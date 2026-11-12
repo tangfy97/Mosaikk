@@ -149,7 +149,9 @@ public enum Stickers {
     private static let navy = RGBA(hex: 0x24496B), coral = RGBA(hex: 0xE0604A), sun = RGBA(hex: 0xF2B544)
     private static let sage = RGBA(hex: 0x7FA08A), rose = RGBA(hex: 0xE58FA0), cream = RGBA(hex: 0xF2EDE3), sky = RGBA(hex: 0x6FA3C8)
 
-    public static let all: [Sticker] = {
+    public static let all: [Sticker] = makeAll()
+
+    private static func makeAll() -> [Sticker] {
         var list: [Sticker] = []
         func add(_ id: String, _ category: Sticker.Category, _ color: RGBA, aspect: Double = 1, _ draw: @escaping @Sendable (CGRect) -> CGPath) {
             list.append(Sticker(id: id, category: category, aspect: aspect, color: color, draw: draw))
@@ -389,5 +391,5 @@ public enum Stickers {
             list.append(Sticker(id: "emoji:" + character, category: .emoji, aspect: 1, color: .white) { CGPath(rect: $0, transform: nil) })
         }
         return list
-    }()
+    }
 }
