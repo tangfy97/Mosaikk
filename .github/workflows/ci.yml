@@ -10,11 +10,15 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
-      - name: Test document, layout, and renderer
-        run: bash scripts/test.sh
+      - name: Engine tests
+        run: swift test --scratch-path build/spm
       - name: Install XcodeGen
         run: brew install xcodegen
-      - name: Generate Xcode project
-        run: xcodegen generate
-      - name: Build app
-        run: xcodebuild -project CollageAtelier.xcodeproj -scheme CollageAtelier -configuration Release -destination 'platform=macOS' -derivedDataPath build/Xcode CODE_SIGNING_ALLOWED=NO build
+      - name: Build the app (Release and App Store configurations)
+        run: |
+          xcodegen generate
+          for config in Release AppStore; do
+            xcodebuild -project Mosaikk.xcodeproj -scheme Mosaikk -configuration $config \
+              -destination 'generic/platform=macOS' -derivedDataPath build/DerivedData.noindex \
+              CODE_SIGNING_ALLOWED=NO build
+          done

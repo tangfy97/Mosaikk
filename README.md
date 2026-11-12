@@ -1,39 +1,51 @@
-# Collage Atelier
+<p align="center"><img src="docs/images/icon.png" width="128" height="128" alt="Mosaikk icon"></p>
 
-A native Mac app for bringing photos into one frame. Built with SwiftUI, AppKit, ImageIO, and Core Graphics. All processing happens on your Mac.
+# Mosaikk
 
-Requires macOS 14 or later, Xcode 16 or later, and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+A native macOS app for making photo collages, entirely on your Mac. Pick a layout, drop in your photos, drag the borders between them until it looks right, and add text, stickers and a background. *Mosaikk* is Norwegian for mosaic.
+
+<p align="center"><img src="docs/images/screenshot.png" width="720" alt="Mosaikk with a six-photo layout"></p>
+
+- **Layouts**: over 200 grids, feature layouts and mosaics for 1 to 25 photos, shaped frames (circle, heart, star, hexagon, arch, pebble), and freeform collages where photos lie loose like prints
+- **Drag the borders** between cells to resize them; lines that run through the whole grid move together (hold ⌥ to move one part). Split a cell side by side or top and bottom, delete it, add cells, or make them all even again
+- **Photos**: drag inside a cell to choose the crop, pinch or use the slider to zoom, drag a photo onto another cell to swap them, turn and flip, Auto Fill and Shuffle
+- **Looks**: 16 filters with adjustable strength, and exposure, brightness, contrast, saturation, warmth, tint, highlights, shadows, hue, vignette, sharpness and blur for each photo
+- **Spacing, margins, rounded corners and shadows** for the whole grid
+- **Text** with any installed font, bold, italic, underline, capitals, alignment, letter spacing and line height, outline, shadow, glow and a highlight box; 14 ready-made styles; type straight onto the canvas
+- **Stickers**: shapes, badges, decorations and emoji, with colour, outline and shadow
+- **Free layer**: move, resize from every edge and corner, rotate, snap to the centre and edges, change opacity, lock, duplicate and stack items
+- **Backgrounds**: colours, linear and radial gradients, eight patterns, a blurred photo, or transparent
+- **Canvas sizes** for proportions (1:1, 4:5, 9:16, 16:9 and more), social media (Instagram, Facebook, X, YouTube, Pinterest, LinkedIn) and print (A4, US Letter, 4 × 6, 5 × 7), or any size up to 12,000 pixels
+- **Export** PNG, JPEG or HEIC at any size, with transparency where the format allows; copy the collage, or share it
+- **Documents**: each collage is a `.mosaikk` file that keeps the original photos, so it opens anywhere and stays editable. Autosave, versions, and undo for every change
+- English, English (UK), Simplified Chinese and Traditional Chinese, following the system language
+- Runs in the App Sandbox with no network access; no accounts, no analytics ([privacy policy](PRIVACY.md))
+
+It needs macOS 14 Sonoma or later, on Apple silicon or Intel.
+
+## Build
+
+Requires Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`).
 
 ```sh
-brew install xcodegen
-bash scripts/build_macos_app.sh
-open "dist/Collage Atelier.app"
+scripts/build.sh          # build/Mosaikk.app, signed to run locally
+scripts/test.sh           # engine tests: layouts, editing, rendering, the document format
+scripts/preflight.sh      # tests, then builds both release configurations and checks them before shipping
+scripts/snapshots.sh      # scripted session with real mouse events, captured into build/snapshots
 ```
 
-To work in Xcode, run `xcodegen generate` and open `CollageAtelier.xcodeproj`. `project.yml` is the source of truth for settings; the generated project is included for convenient opening.
+`project.yml` is the source of truth for the Xcode project; edit it rather than the `.xcodeproj`, then run `xcodegen generate`. The `Release` configuration is the website build and `AppStore` the Mac App Store build; both run in the App Sandbox with no network entitlement.
 
-## Use
+| Script | What it does |
+|---|---|
+| `scripts/appstore.sh` | App Store build: signed installer package, and `upload` sends it to App Store Connect |
+| `scripts/release.sh` | Website build: Developer ID, notarized, as a DMG and zip in `build/release` |
+| `scripts/localize.sh` | Exports every string and fills in the translations from `scripts/translations.py` |
+| `scripts/icon.swift` | Renders the app icon into the asset catalogue |
+| `scripts/sample-photos.swift`, `scripts/storeshot.swift` | Generated sample pictures and App Store screenshot composition |
 
-- Add PNG, JPEG, HEIC, TIFF, WebP, GIF, or BMP images with **⌘I**, the toolbar, or a Finder drop. GIF imports its first frame.
-- Choose Grid, Editorial, Columns, or Rows in the Canvas inspector. Set proportions, spacing, border, corners, and background.
-- Select a photo to crop, rotate, mirror, replace, or reorder it. Drag inside the photo to adjust its crop; drag filmstrip thumbnails to change order.
-- Add text or a highlight from the toolbar. Click an overlay to edit or drag it.
-- Save **⌘S** as an `.atelier` project containing original photos and editable settings. Open several projects in separate windows; standard macOS autosave and recent documents apply.
-- Export **⇧⌘E** as PNG or JPEG, or copy with **⇧⌘C**. Paste a photo with **⇧⌘V**. Standard undo and redo are supported.
-- Toggle the inspector with **⌥⌘I**; return to fit zoom with **⌘0**.
+How it is built: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Design principles: [docs/DESIGN.md](docs/DESIGN.md). Releasing: [docs/APP_STORE.md](docs/APP_STORE.md). Open problems: [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md).
 
-## Code and tests
+## License
 
-`Sources/AtelierCore` owns the model, layout, project format, image pipeline, cache, and renderer. `Sources/AtelierApp` owns document integration, editor, inspector, strip, commands, and export UI. There are no third-party runtime dependencies or network entitlements.
-
-```sh
-bash scripts/test.sh
-```
-
-A project supports up to 200 photos and 512 MB of originals; each photo can be up to 80 MB. Exports are capped at 64 megapixels and 12,000 pixels per side. These are enforced limits, not claims that all maximum-size workflows have been performance-tested. Previews use a 96 MB cost-limited cache; background exports decode one source at a time.
-
-See [design and architecture](docs/plans/2026-11-12-native-redesign.md), [verification](AUDIT.md), and [release preparation](docs/appstore/RELEASE.md).
-
-## Previous editor
-
-The prior webpage editor, AppKit wrapper, and build script are preserved in `legacy/`. The native app does not migrate the old WebKit autosave database or modify it. Keep the old editor available for any existing work until exported. The new build contains no WebKit or browser resources.
+Copyright © 2026 TangSpark. Released under the [Apache License 2.0](LICENSE). Contributions: [CONTRIBUTING.md](CONTRIBUTING.md). Security: [SECURITY.md](SECURITY.md).

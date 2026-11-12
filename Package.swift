@@ -1,13 +1,14 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 5.10
 import PackageDescription
 
+// The engine on its own, for tests and command-line checks. The app compiles these sources directly (see project.yml).
 let package = Package(
-    name: "CollageAtelier",
+    name: "Mosaikk",
+    defaultLocalization: "en",
     platforms: [.macOS(.v14)],
-    products: [.library(name: "AtelierCore", targets: ["AtelierCore"])],
+    products: [.library(name: "MosaikkCore", targets: ["MosaikkCore"])],
     targets: [
-        .target(name: "AtelierCore"),
-        .testTarget(name: "AtelierCoreTests", dependencies: ["AtelierCore"])
-    ],
-    swiftLanguageModes: [.v6]
+        .target(name: "MosaikkCore"),
+        .testTarget(name: "MosaikkCoreTests", dependencies: ["MosaikkCore"]),
+    ]
 )
