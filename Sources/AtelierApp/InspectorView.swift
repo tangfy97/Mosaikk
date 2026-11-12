@@ -62,7 +62,7 @@ struct InspectorView: View {
             Divider()
             VStack(alignment: .leading, spacing: 12) {
                 SectionHeading(title: "Frame")
-                Picker("Proportion", selection: Binding(get: { selectedRatio }, set: setRatio)) {
+                Picker("Proportion", selection: Binding(get: { selectedRatio }, set: { setRatio($0) })) {
                     Text("Landscape · 4:3").tag("4:3")
                     Text("Square · 1:1").tag("1:1")
                     Text("Portrait · 3:4").tag("3:4")
