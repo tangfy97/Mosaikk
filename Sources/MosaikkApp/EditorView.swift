@@ -126,11 +126,15 @@ struct EditorToolbar: ViewModifier {
     @Environment(\.undoManager) private var undoManager
 
     func body(content: Content) -> some View {
+        #if compiler(>=6.2)
         if #available(macOS 26, *) {
             content.toolbar { glassless }
         } else {
             content.toolbar { items }
         }
+        #else
+        content.toolbar { items }
+        #endif
     }
 
     @ToolbarContentBuilder private var items: some ToolbarContent {
@@ -145,6 +149,8 @@ struct EditorToolbar: ViewModifier {
         ToolbarItem(placement: .primaryAction) { inspector }
     }
 
+    // The Liquid Glass toolbar API needs the macOS 26 SDK (Swift 6.2); older Xcodes build the plain toolbar.
+    #if compiler(>=6.2)
     @available(macOS 26, *)
     @ToolbarContentBuilder private var glassless: some ToolbarContent {
         ToolbarItem(placement: .navigation) { undo }.sharedBackgroundVisibility(.hidden)
@@ -157,6 +163,7 @@ struct EditorToolbar: ViewModifier {
         ToolbarItem(placement: .primaryAction) { divider }.sharedBackgroundVisibility(.hidden)
         ToolbarItem(placement: .primaryAction) { inspector }.sharedBackgroundVisibility(.hidden)
     }
+    #endif
 
     private var undo: some View {
         Button { undoManager?.undo() } label: { Label("Undo", systemImage: "arrow.uturn.backward") }
@@ -270,7 +277,11 @@ struct SharedCollage: Transferable {
         FileRepresentation(exportedContentType: .png) { shared in
             let width = min(shared.collage.canvas.width, 4096)
             let data = try Renderer.export(shared.collage, format: .png, pixelWidth: width, quality: 1) { shared.originals[$0] }
-            let url = FileManager.default.temporaryDirectory.appendingPathComponent(String(localized: "Collage") + ".png")
+            // One folder, replaced each time, so shared images don't build up; leftovers go at the next launch.
+            let folder = FileManager.default.temporaryDirectory.appendingPathComponent(TemporaryFiles.prefix + "Share", isDirectory: true)
+            TemporaryFiles.remove(folder)
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            let url = folder.appendingPathComponent(String(localized: "Collage") + ".png")
             try data.write(to: url, options: .atomic)
             return SentTransferredFile(url)
         }

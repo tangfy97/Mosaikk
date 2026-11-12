@@ -33,5 +33,8 @@ for i in {1..400}; do
     fi
 done
 kill $pid 2>/dev/null || true
-cat $container/snapshots/checks.txt
+cp $container/snapshots/checks.txt build/snapshots/$name/
+rm -rf $container/snapshots $container/samples
+cat build/snapshots/$name/checks.txt
+echo
 echo "Snapshots in build/snapshots/$name"

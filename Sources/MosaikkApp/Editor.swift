@@ -218,9 +218,9 @@ final class Editor {
     // MARK: Library
 
     /// Reads picture files, then adds them where `target` says. Files that can't be read are skipped and reported.
-    func importFiles(_ urls: [URL], to target: ImportTarget = .library) {
+    func importFiles(_ urls: [URL], to target: ImportTarget = .library, completion: (() -> Void)? = nil) {
         let urls = Self.expand(urls)
-        guard !urls.isEmpty else { return }
+        guard !urls.isEmpty else { completion?(); return }
         isImporting = true
         Task {
             var loaded: [(Asset, Data)] = []
@@ -233,7 +233,7 @@ final class Editor {
                         defer { if scoped { url.stopAccessingSecurityScopedResource() } }
                         let size = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
                         guard size <= ImageFiles.maximumBytes else { throw MosaikkError.tooLarge(name) }
-                        return try Data(contentsOf: url, options: .mappedIfSafe)
+                        return try Data(contentsOf: url)
                     }.value
                     let asset = try await Task.detached(priority: .userInitiated) { try ImageFiles.inspect(data, name: name) }.value
                     loaded.append((asset, data))
@@ -244,6 +244,7 @@ final class Editor {
             add(loaded, to: target)
             isImporting = false
             report(failures)
+            completion?()
         }
     }
 

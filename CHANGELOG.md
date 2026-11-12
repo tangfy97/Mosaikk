@@ -18,3 +18,4 @@ The first release, rebuilt from scratch as Mosaikk (previously the unreleased Co
 - PNG, JPEG and HEIC export at any size, Copy Collage, and Share.
 - `.mosaikk` documents that keep the original photos, with autosave, versions and undo.
 - English, English (UK), Simplified Chinese and Traditional Chinese.
+- Opens straight into a new collage; you choose where to keep it only when you save. Temporary files and autosaves of untitled collages that no window can reopen are cleaned up, so Mosaikk doesn't grow over time.

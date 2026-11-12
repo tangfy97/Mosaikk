@@ -42,6 +42,10 @@ Cells and the photos in them are separate: a cell can be empty, a picture can be
 
 A `.mosaikk` file is a package: `collage.json`, the original pictures in `Pictures/`, and `QuickLook/Thumbnail.png` for Finder. Saving reuses picture files already in the package. Opening checks everything: values are clamped, references to missing pictures removed, and a file from a newer version is refused with a clear message. The format version is `Collage.formatVersion`; any change to the JSON needs a decoder that still reads version 1.
 
+## Launch and temporary files
+
+Mosaikk opens a new untitled collage at launch rather than the Open panel (`NSShowAppCentricOpenPanelInsteadOfUntitledFile` is registered as false). Untitled collages are autosaved by AppKit, photos included, so they come back after quitting; ten seconds after launch, untitled autosaves that no open window uses and that haven't changed for an hour are removed (`TemporaryFiles.removeOrphanedAutosaves`). Pictures received from Photos drags and the image handed to the share menu live in `Mosaikk-` folders in the app's temporary folder, removed after use and at every launch. Previews are kept in memory only.
+
 ## Checks
 
 - `scripts/test.sh`: engine tests for geometry, border dragging, templates (no overlaps, inside the margins), editing, rendering pixels (orientation, flips, crop panning, transparency), filters, and the document round trip.

@@ -152,6 +152,13 @@ enum Snapshots {
         editor.showExport = false
 
         try? log.joined(separator: "\n").write(to: out.appendingPathComponent("checks.txt"), atomically: true, encoding: .utf8)
+        // Leave nothing behind: discard this untitled collage and its autosave.
+        for document in NSDocumentController.shared.documents {
+            document.updateChangeCount(.changeCleared)
+            if let autosave = document.autosavedContentsFileURL { try? FileManager.default.removeItem(at: autosave) }
+            document.close()
+        }
+        try? FileManager.default.removeItem(at: out.appendingPathComponent("Check.mosaikk"))
         try? "done".write(to: out.appendingPathComponent("step.txt"), atomically: true, encoding: .utf8)
     }
 

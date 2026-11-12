@@ -1002,8 +1002,7 @@ final class CanvasView: NSView, NSTextViewDelegate, NSMenuItemValidation {
 
     /// Pictures dragged from Photos and some other apps arrive as promises to write a file.
     private func receive(_ promises: [NSFilePromiseReceiver], target: Editor.ImportTarget) {
-        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("Dropped-" + UUID().uuidString)
-        try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let folder = TemporaryFiles.folder()
         let group = DispatchGroup()
         let lock = NSLock()
         var urls: [URL] = []
@@ -1015,7 +1014,9 @@ final class CanvasView: NSView, NSTextViewDelegate, NSMenuItemValidation {
             }
         }
         group.notify(queue: .main) { [editor] in
-            editor.importFiles(urls.sorted { $0.lastPathComponent < $1.lastPathComponent }, to: target)
+            editor.importFiles(urls.sorted { $0.lastPathComponent < $1.lastPathComponent }, to: target) {
+                TemporaryFiles.remove(folder)
+            }
         }
     }
 

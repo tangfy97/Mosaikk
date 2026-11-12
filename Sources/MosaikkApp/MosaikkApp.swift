@@ -2,6 +2,13 @@ import SwiftUI
 
 @main
 struct MosaikkApp: App {
+    @NSApplicationDelegateAdaptor private var delegate: AppDelegate
+
+    init() {
+        // Open straight into a new collage instead of the Open panel; choosing where to keep it waits until Save.
+        UserDefaults.standard.register(defaults: ["NSShowAppCentricOpenPanelInsteadOfUntitledFile": false])
+    }
+
     var body: some Scene {
         DocumentGroup(newDocument: { MosaikkDocument() }) { file in
             EditorView(editor: file.document.editor)
@@ -111,6 +118,63 @@ struct MosaikkCommands: Commands {
         let current = editor.zoom ?? editor.fitScale
         let next = (current * factor).clamped(min: editor.fitScale * 0.5, max: max(editor.fitScale * 8, 4))
         editor.zoom = abs(next - editor.fitScale) < editor.fitScale * 0.05 ? nil : next
+    }
+}
+
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        TemporaryFiles.removeLeftovers()
+    }
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // Wait until windows from the last session are back, so their autosaves count as in use.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            TemporaryFiles.removeOrphanedAutosaves()
+        }
+    }
+
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool { true }
+}
+
+/// Files Mosaikk writes for a moment: pictures received from Photos drags, and the PNG handed to the share menu.
+/// They live in the app's own temporary folder and are removed after use and at every launch, so nothing builds up.
+enum TemporaryFiles {
+    static let prefix = "Mosaikk-"
+
+    /// A new folder for one operation.
+    static func folder() -> URL {
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(prefix + UUID().uuidString, isDirectory: true)
+        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        return url
+    }
+
+    static func remove(_ url: URL) {
+        try? FileManager.default.removeItem(at: url)
+    }
+
+    /// Untitled collages are autosaved, with copies of their photos, so they come back after quitting. If Mosaikk
+    /// stops without quitting normally, such a copy can be left that no window will ever open again. Remove those:
+    /// any untitled autosave not used by an open window and untouched for an hour.
+    @MainActor static func removeOrphanedAutosaves() {
+        let inUse = Set(NSDocumentController.shared.documents.compactMap { $0.autosavedContentsFileURL?.standardizedFileURL.path })
+        let folders = [FileManager.default.temporaryDirectory.appendingPathComponent("Autosave Information", isDirectory: true)]
+            + FileManager.default.urls(for: .autosavedInformationDirectory, in: .userDomainMask)
+        let cutoff = Date().addingTimeInterval(-3600)
+        for folder in Set(folders) {
+            let entries = (try? FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: [.contentModificationDateKey])) ?? []
+            for entry in entries where entry.pathExtension == "mosaikk" && !inUse.contains(entry.standardizedFileURL.path) {
+                let modified = (try? entry.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
+                if modified < cutoff { remove(entry) }
+            }
+        }
+    }
+
+    static func removeLeftovers() {
+        let temporary = FileManager.default.temporaryDirectory
+        let entries = (try? FileManager.default.contentsOfDirectory(at: temporary, includingPropertiesForKeys: nil)) ?? []
+        for entry in entries where entry.lastPathComponent.hasPrefix(prefix) {
+            remove(entry)
+        }
     }
 }
 
