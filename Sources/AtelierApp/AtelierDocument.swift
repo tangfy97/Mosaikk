@@ -13,6 +13,7 @@ final class AtelierDocument: ReferenceFileDocument, @unchecked Sendable {
     @Published private(set) var project: Project
     private let lock = NSLock()
     private var stored: ProjectArchive
+    @MainActor private weak var documentUndoManager: UndoManager?
     var assets: [UUID: Data] { lock.withLock { stored.assets } }
 
     init() { project = Project(); stored = ProjectArchive(project: Project(), assets: [:]) }
@@ -32,7 +33,11 @@ final class AtelierDocument: ReferenceFileDocument, @unchecked Sendable {
     }
     @MainActor private func apply(_ next: Project, title: String, undo: UndoManager?) {
         let previous = project
-        undo?.registerUndo(withTarget: self) { [weak undo] target in target.apply(previous, title: title, undo: undo) }
+        documentUndoManager = undo
+        undo?.registerUndo(withTarget: self) { target in
+            // Older SDKs don't annotate this callback; this manager is only used on the main actor.
+            MainActor.assumeIsolated { target.apply(previous, title: title, undo: target.documentUndoManager) }
+        }
         undo?.setActionName(title)
         lock.withLock { stored.project = next }
         project = next
