@@ -21,7 +21,7 @@ A native macOS app for making photo collages, entirely on your Mac. Pick a layou
 - English, English (UK), Simplified Chinese and Traditional Chinese, following the system language
 - Runs in the App Sandbox with no network access; no accounts, no analytics ([privacy policy](PRIVACY.md))
 
-It needs macOS 14 Sonoma or later, on Apple silicon or Intel.
+**Download:** Mosaikk 1.0 is free. Get the signed, notarized disk image from [Releases](https://github.com/tangfy97/Mosaikk/releases/latest) ([tang-spark.no/mosaikk](https://tang-spark.no/mosaikk.html)); it is coming to the Mac App Store. It needs macOS 14 Sonoma or later, on Apple silicon or Intel.
 
 ## Build
 
@@ -39,7 +39,9 @@ scripts/snapshots.sh      # scripted session with real mouse events, captured in
 | Script | What it does |
 |---|---|
 | `scripts/appstore.sh` | App Store build: signed installer package, and `upload` sends it to App Store Connect |
-| `scripts/release.sh` | Website build: Developer ID, notarized, as a DMG and zip in `build/release` |
+| `scripts/release.sh` | Download build: Developer ID, notarized, as a DMG and zip in `build/release` |
+| `scripts/github-release.sh` | Publishes that build as a GitHub release, which tang-spark.no links to |
+| `scripts/publish-website.sh` | Copies the pages from `website/` into the tang-spark.no site (no installers) |
 | `scripts/localize.sh` | Exports every string and fills in the translations from `scripts/translations.py` |
 | `scripts/icon.swift` | Renders the app icon into the asset catalogue |
 | `scripts/sample-photos.swift`, `scripts/storeshot.swift` | Generated sample pictures and App Store screenshot composition |

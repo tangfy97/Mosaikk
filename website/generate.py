@@ -5,7 +5,7 @@
 
 The pages use the site's own styles.css (the Plakat layout shared with Spolo, Rydd, Kvikkshot and Glimt).
 The version comes from project.yml. Set APP_STORE_URL once the app is live to show the
-Mac App Store button; the download button appears when publish-website.sh copies a notarized disk image.
+Mac App Store button; the download button links to the latest GitHub release once there is one.
 """
 import html
 import os
@@ -17,6 +17,7 @@ DIST = ROOT / "website" / "dist"
 VERSION = re.search(r'MARKETING_VERSION: "([^"]+)"', (ROOT / "project.yml").read_text()).group(1)
 APP_STORE_URL = ""
 # scripts/publish-website.sh sets this when it copies a notarized disk image to the site.
+# Downloads are GitHub releases; the site hosts no installers. publish-website.sh sets this once a release exists.
 DOWNLOAD_URL = os.environ.get("MOSAIKK_DOWNLOAD_URL", "")
 GITHUB = "https://github.com/tangfy97/Mosaikk"
 
@@ -30,10 +31,10 @@ COPY = {
     "en": {
         "title": "Mosaikk — Photo collages, shaped by hand.",
         "description": "Mosaikk makes photo collages on your Mac. Pick a layout, drop in your photos and drag the borders until it looks right; add text, stickers and a background, and export at any size. Free, private and offline.",
-        "label": "macOS 14+ · Free",
+        "label": "macOS 14+ · Free · Open source",
         "headline": "Photo collages, shaped by hand.",
         "lead": "Pick one of over 200 layouts, drop in your photos and drag the borders between them until it looks right. Add words, stickers and a background, and export a picture at any size, right on your Mac. Mosaikk is Norwegian for mosaic.",
-        "facts": [("Platform", "macOS 14 or later"), ("Price", "Free"), ("Network", "None at all"), ("Languages", "EN, 简体, 繁體")],
+        "facts": [("Platform", "macOS 14 or later"), ("Price", "Free, Apache 2.0"), ("Network", "None at all"), ("Languages", "EN, 简体, 繁體")],
         "shot_alt": "Mosaikk with a six-photo layout and a text style being edited",
         "what": "What it does",
         "features": [
@@ -44,10 +45,10 @@ COPY = {
             ("Any size", "Colours, gradients, patterns or a blurred photo behind. Social, print and custom sizes; PNG, JPEG or HEIC."),
         ],
         "get": "Get Mosaikk",
-        "get_text_store": "Free on the Mac App Store, and as a signed, notarized download.",
-        "get_text_download": "Free, as a signed and notarized download. Coming soon to the Mac App Store.",
+        "get_text_store": "Free on the Mac App Store. Signed and notarized downloads are also on GitHub.",
+        "get_text_download": "Free. Signed and notarized downloads are on GitHub; open the disk image and drag Mosaikk to Applications. Coming soon to the Mac App Store.",
         "get_text_soon": "Free. Coming soon to the Mac App Store.",
-        "btn_store": "Mac App Store", "btn_download": "Download for Mac", "btn_source": "Source on GitHub", "btn_support": "Support & privacy",
+        "btn_store": "Mac App Store", "btn_download": "Download from GitHub", "btn_source": "Source code", "btn_support": "Support & privacy",
         "nav_apps": "Apps", "nav_support": "Support",
         "s_title": "Mosaikk support, privacy and terms",
         "s_hero": "Support",
@@ -73,7 +74,7 @@ COPY = {
         ],
         "privacy_title": "Privacy policy",
         "privacy": [
-            "Last updated 12 November 2026. This policy covers the Mac App Store version and the version downloaded from this website.",
+            "Last updated 12 November 2026. This policy covers the Mac App Store version and the version downloaded from GitHub.",
             "<b>Mosaikk collects no data.</b> It has no network access: the App Sandbox does not let it connect to the internet. There are no accounts, analytics, telemetry, crash reporting, advertising or update checks, and no third-party code.",
             "Mosaikk reads the pictures you add, to show them and put them in your collage. A saved collage is a .mosaikk file in the place you choose, holding unchanged copies of the pictures you added so it can be edited later. Their metadata, such as the date or place a photo was taken, stays in those copies; exported images don't include it.",
             "Photos you add from your Photos library are chosen in the system's photo picker, so Mosaikk never has access to the library itself.",
@@ -82,7 +83,7 @@ COPY = {
         ],
         "terms_title": "Terms",
         "terms": [
-            "Mosaikk is free. You may use it for personal and commercial work.",
+            "Mosaikk is free and open source under the Apache License 2.0. You may use it for personal and commercial work.",
             "It is provided as is, without warranty. Mosaikk never changes the pictures you add, but TangSpark is not liable for loss of data or other damages from using it, as far as the law allows.",
             "You are responsible for having the rights to the pictures you use. Mac App Store downloads are also covered by Apple's standard licence agreement.",
         ],
@@ -97,10 +98,10 @@ COPY = {
     "zh-cn": {
         "title": "Mosaikk — 亲手拼出的照片拼贴。",
         "description": "Mosaikk 在你的 Mac 上制作照片拼贴。选一个布局，放入照片，拖动边框直到满意；再加上文字、贴纸和背景，以任意尺寸导出。免费、私密、离线。",
-        "label": "macOS 14+ · 免费",
+        "label": "macOS 14+ · 免费 · 开源",
         "headline": "亲手拼出的照片拼贴。",
         "lead": "从 200 多个布局中选一个，放入照片，拖动照片之间的边框，直到看起来刚刚好。加上文字、贴纸和背景，在你的 Mac 上导出任意尺寸的图片。Mosaikk 是挪威语里“马赛克”的意思。",
-        "facts": [("平台", "macOS 14 或更新版本"), ("价格", "免费"), ("网络", "完全不联网"), ("语言", "EN, 简体, 繁體")],
+        "facts": [("平台", "macOS 14 或更新版本"), ("价格", "免费，Apache 2.0"), ("网络", "完全不联网"), ("语言", "EN, 简体, 繁體")],
         "shot_alt": "Mosaikk 中的六张照片布局，正在编辑文字样式",
         "what": "它能做什么",
         "features": [
@@ -111,10 +112,10 @@ COPY = {
             ("任意尺寸", "纯色、渐变、图案或模糊照片做背景。社交媒体、打印和自定尺寸；导出 PNG、JPEG 或 HEIC。"),
         ],
         "get": "获取 Mosaikk",
-        "get_text_store": "可在 Mac App Store 免费获取，也可以下载经过签名和公证的版本。",
-        "get_text_download": "免费下载，经过签名和公证。即将登陆 Mac App Store。",
+        "get_text_store": "可在 Mac App Store 免费获取。经过签名和公证的下载版也在 GitHub 上。",
+        "get_text_download": "免费。经过签名和公证的下载版在 GitHub 上；打开磁盘映像，把 Mosaikk 拖到“应用程序”即可。即将登陆 Mac App Store。",
         "get_text_soon": "免费。即将登陆 Mac App Store。",
-        "btn_store": "Mac App Store", "btn_download": "下载 Mac 版", "btn_source": "GitHub 源代码", "btn_support": "支持与隐私",
+        "btn_store": "Mac App Store", "btn_download": "从 GitHub 下载", "btn_source": "源代码", "btn_support": "支持与隐私",
         "nav_apps": "Apps", "nav_support": "支持",
         "s_title": "Mosaikk 支持、隐私与条款",
         "s_hero": "支持",
@@ -140,7 +141,7 @@ COPY = {
         ],
         "privacy_title": "隐私政策",
         "privacy": [
-            "最后更新：2026 年 11 月 12 日。本政策适用于 Mac App Store 版本和从本网站下载的版本。",
+            "最后更新：2026 年 11 月 12 日。本政策适用于 Mac App Store 版本和从 GitHub 下载的版本。",
             "<b>Mosaikk 不收集任何数据。</b>它完全没有网络权限：App 沙盒不允许它连接互联网。没有账号、统计、遥测、崩溃报告、广告或更新检查，也没有任何第三方代码。",
             "Mosaikk 读取你添加的图片，用来显示并放进你的拼贴。保存的拼贴是一个 .mosaikk 文件，放在你选择的位置，里面是你添加的图片的原样副本，以便以后继续编辑。照片的元数据（如拍摄时间和地点）会留在这些副本里；导出的图片不包含这些信息。",
             "从“照片”图库添加的照片是在系统的照片选择器里挑选的，Mosaikk 从来无法访问图库本身。",
@@ -149,7 +150,7 @@ COPY = {
         ],
         "terms_title": "使用条款",
         "terms": [
-            "Mosaikk 免费，可用于个人和商业用途。",
+            "Mosaikk 免费，并以 Apache License 2.0 开源，可用于个人和商业用途。",
             "Mosaikk 按“现状”提供，不附带任何保证。Mosaikk 从不修改你添加的图片；但在法律允许的范围内，TangSpark 不对因使用本软件造成的数据丢失或其他损失负责。",
             "你需要拥有所用图片的相应权利。从 Mac App Store 下载的版本同时适用 Apple 的标准许可协议。",
         ],
@@ -164,10 +165,10 @@ COPY = {
     "zh-tw": {
         "title": "Mosaikk — 親手拼出的照片拼貼。",
         "description": "Mosaikk 在你的 Mac 上製作照片拼貼。選一個佈局，放入照片，拖移邊框直到滿意；再加上文字、貼紙和背景，以任意尺寸輸出。免費、私密、離線。",
-        "label": "macOS 14+ · 免費",
+        "label": "macOS 14+ · 免費 · 開源",
         "headline": "親手拼出的照片拼貼。",
         "lead": "從 200 多個佈局中選一個，放入照片，拖移照片之間的邊框，直到看起來剛剛好。加上文字、貼紙和背景，在你的 Mac 上輸出任意尺寸的圖片。Mosaikk 是挪威語「馬賽克」的意思。",
-        "facts": [("平台", "macOS 14 或以上版本"), ("價格", "免費"), ("網路", "完全不連網"), ("語言", "EN, 简体, 繁體")],
+        "facts": [("平台", "macOS 14 或以上版本"), ("價格", "免費，Apache 2.0"), ("網路", "完全不連網"), ("語言", "EN, 简体, 繁體")],
         "shot_alt": "Mosaikk 中的六張照片佈局，正在編輯文字樣式",
         "what": "它能做什麼",
         "features": [
@@ -178,10 +179,10 @@ COPY = {
             ("任意尺寸", "純色、漸層、圖樣或模糊照片做背景。社群媒體、列印和自訂尺寸；輸出 PNG、JPEG 或 HEIC。"),
         ],
         "get": "取得 Mosaikk",
-        "get_text_store": "可在 Mac App Store 免費取得，也可以下載經過簽署和公證的版本。",
-        "get_text_download": "免費下載，經過簽署和公證。即將登上 Mac App Store。",
+        "get_text_store": "可在 Mac App Store 免費取得。經過簽署和公證的下載版也在 GitHub 上。",
+        "get_text_download": "免費。經過簽署和公證的下載版在 GitHub 上；打開磁碟映像檔，把 Mosaikk 拖到「應用程式」即可。即將登上 Mac App Store。",
         "get_text_soon": "免費。即將登上 Mac App Store。",
-        "btn_store": "Mac App Store", "btn_download": "下載 Mac 版", "btn_source": "GitHub 原始碼", "btn_support": "支援與隱私",
+        "btn_store": "Mac App Store", "btn_download": "從 GitHub 下載", "btn_source": "原始碼", "btn_support": "支援與隱私",
         "nav_apps": "Apps", "nav_support": "支援",
         "s_title": "Mosaikk 支援、隱私與條款",
         "s_hero": "支援",
@@ -207,7 +208,7 @@ COPY = {
         ],
         "privacy_title": "隱私權政策",
         "privacy": [
-            "最後更新：2026 年 11 月 12 日。本政策適用於 Mac App Store 版本和從本網站下載的版本。",
+            "最後更新：2026 年 11 月 12 日。本政策適用於 Mac App Store 版本和從 GitHub 下載的版本。",
             "<b>Mosaikk 不收集任何資料。</b>它完全沒有網路權限：App 沙盒不允許它連上網際網路。沒有帳號、統計、遙測、當機報告、廣告或更新檢查，也沒有任何第三方程式碼。",
             "Mosaikk 讀取你加入的圖片，用來顯示並放進你的拼貼。儲存的拼貼是一個 .mosaikk 檔案，放在你選擇的位置，裡面是你加入的圖片的原樣副本，以便日後繼續編輯。照片的後設資料（例如拍攝時間和地點）會留在這些副本裡；輸出的圖片不包含這些資訊。",
             "從「照片」圖庫加入的照片是在系統的照片選擇器中挑選的，Mosaikk 從來無法取用圖庫本身。",
@@ -216,7 +217,7 @@ COPY = {
         ],
         "terms_title": "使用條款",
         "terms": [
-            "Mosaikk 免費，可用於個人和商業用途。",
+            "Mosaikk 免費，並以 Apache License 2.0 開源，可用於個人和商業用途。",
             "Mosaikk 依「現狀」提供，不附帶任何保證。Mosaikk 從不修改你加入的圖片；但在法律允許的範圍內，TangSpark 不對因使用本軟體造成的資料遺失或其他損失負責。",
             "你需要擁有所用圖片的相應權利。從 Mac App Store 下載的版本同時適用 Apple 的標準授權協議。",
         ],
@@ -263,6 +264,8 @@ def product(lang):
                   (f'<a class="btn{"" if APP_STORE_URL else " red"}" href="{DOWNLOAD_URL}">{e(c["btn_download"])}</a>' if DOWNLOAD_URL else "")
     else:
         text, buttons = c["get_text_soon"], f'<a class="btn red" href="{GITHUB}">{e(c["btn_source"])}</a>'
+    if APP_STORE_URL or DOWNLOAD_URL:
+        buttons += f'<a class="btn" href="{GITHUB}">{e(c["btn_source"])}</a>'
     buttons += f'<a class="btn" href="{support}">{e(c["btn_support"])}</a>'
     shot = "img/mosaikk-shot.jpg" if lang == "en" else f"img/mosaikk-shot{s}.jpg"
     features = "".join(f"<li><b>{e(a)}</b><span>{e(b)}</span></li>" for a, b in c["features"])

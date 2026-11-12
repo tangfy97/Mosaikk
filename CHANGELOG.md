@@ -2,7 +2,7 @@
 
 All notable changes to Mosaikk are listed here. Versions follow [Semantic Versioning](https://semver.org).
 
-## [1.0.0] - Unreleased
+## [1.0.0] - 2026-11-12
 
 The first release, rebuilt from scratch as Mosaikk (previously the unreleased Collage Atelier).
 
