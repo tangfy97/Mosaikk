@@ -27,7 +27,7 @@ for i in {1..400}; do
     [[ $step == done ]] && break
     if [[ -n $step && $step != $last ]]; then
         sleep 0.3
-        window=$(swift scripts/window-id.swift Mosaikk 2>/dev/null | head -1)
+        window=$(swift scripts/window-id.swift Mosaikk $pid 2>/dev/null | head -1)
         [[ -n $window ]] && screencapture -x -o -l $window build/snapshots/$name/$step.png
         last=$step
     fi
