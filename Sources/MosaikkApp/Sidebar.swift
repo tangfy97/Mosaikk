@@ -133,6 +133,17 @@ struct LayoutsPane: View {
             .padding(.vertical, 8)
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 0, pinnedViews: []) {
+                    if editor.collage.assets.count >= 2 {
+                        let selected = editor.collage.templateID == Collage.fittedTemplateID
+                        PaneHeader("For Your Photos")
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 68, maximum: 96), spacing: 10)], spacing: 10) {
+                            LayoutTile(fittedFor: selected ? editor.collage : FittedPreviews.collage(for: editor.collage, seed: editor.fitSeed),
+                                       selected: selected)
+                                .onTapGesture { editor.fitLayout() }
+                                .help(Text("Every photo whole, without cropping. Click again for another arrangement."))
+                        }
+                        .padding(.horizontal, 14)
+                    }
                     ForEach(groups, id: \.title) { group in
                         PaneHeader(LocalizedStringKey(group.title))
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 68, maximum: 96), spacing: 10)], spacing: 10) {
@@ -178,18 +189,38 @@ struct LayoutsPane: View {
 
 /// A small drawing of a layout at the canvas's proportions.
 struct LayoutTile: View {
-    let template: Template
-    let aspect: Double
+    let collage: Collage
+    let freeform: Bool
     let selected: Bool
+    let label: Text
+    var fitted = false
+
+    init(template: Template, aspect: Double, selected: Bool) {
+        var collage = Collage()
+        collage.apply(template)
+        collage.setCanvas(CanvasSize(width: Int(1000 * max(aspect, 1)), height: Int(1000 / min(aspect, 1))))
+        self.collage = collage
+        freeform = template.family == .freeform
+        self.selected = selected
+        label = Text("^[\(template.count) Photo](inflect: true) layout")
+    }
+
+    /// A layout made for the photos in `collage`.
+    init(fittedFor collage: Collage, selected: Bool) {
+        self.collage = collage
+        freeform = false
+        self.selected = selected
+        fitted = true
+        label = Text("Layout for your photos")
+    }
 
     var body: some View {
+        let aspect = collage.canvas.aspect
         Canvas { context, size in
-            let rect = CGRect(origin: .zero, size: size)
-            var collage = Collage()
-            collage.apply(template)
-            collage.setCanvas(CanvasSize(width: Int(1000 * max(aspect, 1)), height: Int(1000 / min(aspect, 1))))
+            var collage = collage
             collage.style.spacing = 0.035
             collage.style.margin = 0.035
+            let rect = CGRect(origin: .zero, size: size)
             let k = size.width / collage.size.width
             let color = selected ? Theme.layoutTileSelected : Theme.layoutTile
             context.fill(Path(roundedRect: rect, cornerRadius: 3), with: .color(Color.primary.opacity(0.05)))
@@ -203,14 +234,14 @@ struct LayoutTile: View {
             for item in collage.items {
                 let r = item.rect(in: collage)
                 let scaled = CGRect(x: r.minX * k, y: r.minY * k, width: r.width * k, height: r.height * k)
-                if case .photo(let photo) = item.content {
+                if case .photo(let photo) = item.content, photo.fromTemplate {
                     let frame = ShapePath.fitted(photo.shape, in: scaled)
                     let path = Path(ShapePath.frame(photo.shape, in: frame, cornerRadius: 1.5))
                     context.fill(path, with: .color(Color(nsColor: .windowBackgroundColor)))
                     context.fill(Path(ShapePath.frame(photo.shape, in: frame.insetBy(dx: 2, dy: 2), cornerRadius: 1)), with: .color(color))
                 }
             }
-            if template.family == .freeform {
+            if freeform {
                 for (i, angle) in [-8.0, 6.0, -3.0].enumerated() {
                     let w = size.width * 0.42
                     var c = context
@@ -229,10 +260,38 @@ struct LayoutTile: View {
             RoundedRectangle(cornerRadius: 5)
                 .strokeBorder(selected ? Color.accentColor : .clear, lineWidth: 2)
         )
+        .overlay(alignment: .topTrailing) {
+            if fitted {
+                Image(systemName: "sparkles")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.white, Color.accentColor)
+                    .padding(4)
+                    .background(Circle().fill(Color.accentColor))
+                    .offset(x: 4, y: -4)
+            }
+        }
         .contentShape(Rectangle())
         .accessibilityElement()
-        .accessibilityLabel(Text("^[\(template.count) Photo](inflect: true) layout"))
+        .accessibilityLabel(label)
         .accessibilityAddTraits(selected ? [.isButton, .isSelected] : .isButton)
+    }
+}
+
+/// Fitted layouts for the sidebar, cached because each one is a search.
+@MainActor
+enum FittedPreviews {
+    private static var cache: [String: Collage] = [:]
+
+    static func collage(for collage: Collage, seed: UInt64) -> Collage {
+        let photos = collage.photosForFittedLayout
+        let key = photos.map { "\($0.asset)\($0.quarterTurns)" }.joined() + "\(collage.canvas.width)x\(collage.canvas.height)-\(collage.style.margin)-\(seed)"
+        if let cached = cache[key] { return cached }
+        var fitted = collage
+        fitted.items.removeAll()
+        fitted.fitLayoutToPhotos(seed: seed)
+        if cache.count > 64 { cache.removeAll() }
+        cache[key] = fitted
+        return fitted
     }
 }
 

@@ -24,6 +24,9 @@ struct CanvasRepresentable: NSViewRepresentable {
 }
 
 final class CanvasView: NSView, NSTextViewDelegate, NSMenuItemValidation {
+    /// Photos enlarged more than this for the export look soft.
+    static let softEnlargement = 1.5
+
     let editor: Editor
     private var pan = CGPoint.zero
     private var drag: Drag?
@@ -335,6 +338,20 @@ final class CanvasView: NSView, NSTextViewDelegate, NSMenuItemValidation {
             break
         }
 
+        // Photos too small for the export size.
+        for cell in collage.cells {
+            guard let fill = cell.photo, let asset = collage.asset(fill.asset), let frame = frameRect(of: cell, in: geometry),
+                  fill.enlargement(for: asset, in: frame) > Self.softEnlargement else { continue }
+            let rect = toView(frame)
+            guard rect.width > 60, rect.height > 60 else { continue }
+            let badge = CGRect(x: rect.maxX - 26, y: rect.minY + 8, width: 18, height: 18)
+            NSColor.systemOrange.setFill()
+            NSBezierPath(ovalIn: badge).fill()
+            let mark = NSAttributedString(string: "!", attributes: [.font: NSFont.systemFont(ofSize: 12, weight: .heavy), .foregroundColor: NSColor.white])
+            let markSize = mark.size()
+            mark.draw(at: CGPoint(x: badge.midX - markSize.width / 2, y: badge.midY - markSize.height / 2))
+        }
+
         // Snapping guides.
         if !guides.isEmpty {
             NSColor.systemPink.setStroke()
@@ -527,8 +544,10 @@ final class CanvasView: NSView, NSTextViewDelegate, NSMenuItemValidation {
             editor.chooseFiles(for: .cell(id))
         case .cell(let id):
             editor.selection = .cell(id)
-            if let cell = collage.cell(id), let fill = cell.photo, let frame = frameRect(of: cell, in: collage.geometry) {
-                drag = Drag(kind: .pan(id, startFill: fill, frame: frame, inItem: false), start: point)
+            if let cell = collage.cell(id), let fill = cell.photo, let frame = frameRect(of: cell, in: collage.geometry),
+               let asset = collage.asset(fill.asset) {
+                // Start from the crop as shown, which may be centred on the photo's subject.
+                drag = Drag(kind: .pan(id, startFill: fill.effective(for: asset, in: frame), frame: frame, inItem: false), start: point)
             }
         case .canvas:
             editor.selection = nil
@@ -793,7 +812,15 @@ final class CanvasView: NSView, NSTextViewDelegate, NSMenuItemValidation {
         let point = convert(event.locationInWindow, from: nil)
         // Pinching a selected photo zooms the photo inside its frame.
         if editor.selectedFill != nil, isOverSelection(point) {
-            if event.phase == .began { editor.beginGesture() }
+            if event.phase == .began {
+                editor.beginGesture()
+                // Keep the subject where it is shown before zooming changes the crop to a chosen one.
+                if case .cell(let id)? = editor.selection, let cell = collage.cell(id), let fill = cell.photo,
+                   let frame = frameRect(of: cell, in: collage.geometry), let asset = collage.asset(fill.asset) {
+                    let shown = fill.effective(for: asset, in: frame)
+                    editor.updateGesture { $0.updateCell(id) { $0.photo = shown } }
+                }
+            }
             editor.updateFill { $0.zoom = ($0.zoom * (1 + event.magnification)).clamped(PhotoFill.zoomRange) }
             if event.phase == .ended || event.phase == .cancelled { editor.endGesture("Zoom Photo") }
             return

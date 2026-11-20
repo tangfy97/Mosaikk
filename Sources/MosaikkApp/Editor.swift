@@ -421,6 +421,17 @@ final class Editor {
         selection = .item(item.id)
     }
 
+    /// The arrangement the fitted layout uses; clicking the fitted layout again moves to the next one.
+    var fitSeed: UInt64 = 0
+
+    /// A layout made for the photos, so every photo shows whole.
+    func fitLayout() {
+        if collage.templateID == Collage.fittedTemplateID { fitSeed &+= 1 }
+        let seed = fitSeed
+        change("Fit Layout to Photos") { $0.fitLayoutToPhotos(seed: seed) }
+        if case .cell = selection { selection = nil }
+    }
+
     func apply(_ template: Template) {
         change("Change Layout") { $0.apply(template) }
         if case .cell = selection { selection = nil }

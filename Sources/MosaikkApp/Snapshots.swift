@@ -55,6 +55,22 @@ enum Snapshots {
         editor.tab = .photos
         await shot("02-filled")
 
+        // A layout made for these photos: every photo whole.
+        editor.tab = .layouts
+        editor.fitLayout()
+        do {
+            let geometry = editor.collage.geometry
+            let worst = editor.collage.cells.compactMap { cell -> Double? in
+                guard let fill = cell.photo, let asset = editor.collage.asset(fill.asset), let rect = geometry.cells[cell.id] else { return nil }
+                let ratio = (rect.width / rect.height) / asset.aspect
+                return max(ratio, 1 / ratio)
+            }.max() ?? 99
+            check(editor.collage.cells.count == editor.collage.assets.count, "fitted layout holds every photo (\(editor.collage.cells.count))")
+            check(worst < 1.12, "fitted layout crops at most \(Int((worst - 1) * 100))%")
+            check(editor.collage.assets.contains { $0.focus != nil }, "Vision found a focus point in the samples")
+        }
+        await shot("02b-fitted")
+
         if let template = Templates.template("mosaic-6-steps") { editor.apply(template) }
         editor.change("Fill Empty Cells") { $0.autoFill() }
         editor.tab = .layouts

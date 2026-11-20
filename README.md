@@ -6,6 +6,9 @@ A native macOS app for making photo collages, entirely on your Mac. Pick a layou
 
 <p align="center"><img src="docs/images/screenshot.png" width="720" alt="Mosaikk with a six-photo layout"></p>
 
+- **A layout made for your photos**: one click arranges every photo so it shows whole, without cropping, each in its own shape; click again for another arrangement
+- **Smart crop**: faces and subjects, found on your Mac with Apple's Vision framework, stay in view however a cell is shaped
+- **Resolution check**: cells whose photo is too small for the canvas size are marked before you export or print
 - **Layouts**: over 200 grids, feature layouts and mosaics for 1 to 25 photos, shaped frames (circle, heart, star, hexagon, arch, pebble), and freeform collages where photos lie loose like prints
 - **Drag the borders** between cells to resize them; lines that run through the whole grid move together (hold ⌥ to move one part). Split a cell side by side or top and bottom, delete it, add cells, or make them all even again
 - **Photos**: drag inside a cell to choose the crop, pinch or use the slider to zoom, drag a photo onto another cell to swap them, turn and flip, Auto Fill and Shuffle
@@ -21,7 +24,7 @@ A native macOS app for making photo collages, entirely on your Mac. Pick a layou
 - English, English (UK), Simplified Chinese and Traditional Chinese, following the system language
 - Runs in the App Sandbox with no network access; no accounts, no analytics ([privacy policy](PRIVACY.md))
 
-**Download:** Mosaikk 1.0 is free. Get the signed, notarized disk image from [Releases](https://github.com/tangfy97/Mosaikk/releases/latest) ([tang-spark.no/mosaikk](https://tang-spark.no/mosaikk.html)); it is coming to the Mac App Store. It needs macOS 14 Sonoma or later, on Apple silicon or Intel.
+**Download:** Mosaikk 1.1 is free. Get the signed, notarized disk image from [Releases](https://github.com/tangfy97/Mosaikk/releases/latest) ([tang-spark.no/mosaikk](https://tang-spark.no/mosaikk.html)); it is coming to the Mac App Store. It needs macOS 14 Sonoma or later, on Apple silicon or Intel.
 
 ## Build
 

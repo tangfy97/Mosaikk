@@ -315,10 +315,15 @@ struct CellInspector: View {
     let editor: Editor
     let cell: Cell
 
+    private func isSoft(_ fill: PhotoFill) -> Bool {
+        guard let asset = editor.collage.asset(fill.asset), let rect = editor.collage.geometry.cells[cell.id] else { return false }
+        return fill.enlargement(for: asset, in: ShapePath.fitted(cell.shape, in: rect)) > CanvasView.softEnlargement
+    }
+
     var body: some View {
         Form {
             if let fill = cell.photo {
-                PhotoControls(editor: editor, fill: fill)
+                PhotoControls(editor: editor, fill: fill, soft: isSoft(fill))
             } else {
                 Section {
                     Header(title: String(localized: "Empty Cell"))
@@ -395,12 +400,17 @@ extension FrameShape {
 struct PhotoControls: View {
     let editor: Editor
     let fill: PhotoFill
+    var soft = false
     @State private var showAdjustments = true
 
     var body: some View {
         let asset = editor.collage.asset(fill.asset)
         Section {
             Header(title: asset?.name ?? "", detail: asset.map { "\($0.pixelWidth) × \($0.pixelHeight)" })
+            if soft {
+                Label("Low resolution for this size", systemImage: "exclamationmark.triangle.fill")
+                    .foregroundStyle(.orange)
+            }
             LabeledContent("Photo") {
                 HStack {
                     Button("Replace…") {

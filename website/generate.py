@@ -38,6 +38,7 @@ COPY = {
         "shot_alt": "Mosaikk with a six-photo layout and a text style being edited",
         "what": "What it does",
         "features": [
+            ("Made for your photos", "One click arranges every photo so it shows whole, each in its own shape. Smart crop keeps faces in view, found on your Mac with Vision."),
             ("Layouts", "Grids, feature layouts and mosaics for 1 to 25 photos, shaped frames, and freeform collages where photos lie loose like prints."),
             ("Drag the borders", "Resize cells by dragging the lines between them. Split, delete or add cells, or make them all even again."),
             ("Each photo", "Drag to choose the crop, zoom, turn and flip; drag onto another cell to swap. 16 filters and 12 adjustments."),
@@ -89,6 +90,7 @@ COPY = {
         ],
         "notes_title": "Release notes",
         "notes": [
+            ("Version 1.1.0", "November 2026", "A layout made for your photos, with every photo whole and no cropping; smart crop that keeps faces and subjects in view, found on your Mac with Vision; and a mark on photos too small for the export size."),
             ("Version 1.0.0", "November 2026", "First release: over 200 layouts with draggable borders, shaped frames and freeform collages; crop, filters and adjustments for each photo; text, stickers and backgrounds; social, print and custom sizes; PNG, JPEG and HEIC export; four languages."),
         ],
         "contact_title": "Contact",
@@ -105,6 +107,7 @@ COPY = {
         "shot_alt": "Mosaikk 中的六张照片布局，正在编辑文字样式",
         "what": "它能做什么",
         "features": [
+            ("为你的照片排版", "一键把每张照片完整排好，各自保持原来的比例。智能裁剪用 Vision 在你的 Mac 上找到人脸，让它们始终在画面里。"),
             ("布局", "1 到 25 张照片的网格、主图布局和马赛克，带形状的相框，还有像散放照片一样的自由排列。"),
             ("拖动边框", "拖动格子之间的线来调整大小。可以分割、删除或增加格子，也能一键让它们等大。"),
             ("每张照片", "拖动选择裁剪范围，缩放、旋转、翻转；拖到另一个格子上就能交换。16 种滤镜和 12 项调整。"),
@@ -156,6 +159,7 @@ COPY = {
         ],
         "notes_title": "更新说明",
         "notes": [
+            ("版本 1.1.0", "2026 年 11 月", "为你的照片生成布局，每张照片都完整显示、不裁剪；智能裁剪用 Vision 在你的 Mac 上找到人脸和主体并保持在画面里；照片分辨率不够导出尺寸时会有提示。"),
             ("版本 1.0.0", "2026 年 11 月", "首次发布：200 多个可拖动边框的布局、形状相框和自由排列；每张照片的裁剪、滤镜和调整；文字、贴纸和背景；社交媒体、打印和自定尺寸；导出 PNG、JPEG 和 HEIC；四种语言。"),
         ],
         "contact_title": "联系",
@@ -172,6 +176,7 @@ COPY = {
         "shot_alt": "Mosaikk 中的六張照片佈局，正在編輯文字樣式",
         "what": "它能做什麼",
         "features": [
+            ("為你的照片排版", "一鍵把每張照片完整排好，各自保持原來的比例。智慧裁切用 Vision 在你的 Mac 上找到人臉，讓它們始終在畫面裡。"),
             ("佈局", "1 到 25 張照片的格線、主圖佈局和馬賽克，帶形狀的相框，還有像散放照片一樣的自由排列。"),
             ("拖移邊框", "拖移格子之間的線來調整大小。可以分割、刪除或加入格子，也能一鍵讓它們等大。"),
             ("每張照片", "拖移選擇裁切範圍，縮放、旋轉、翻轉；拖到另一個格子上就能交換。16 種濾鏡和 12 項調整。"),
@@ -223,6 +228,7 @@ COPY = {
         ],
         "notes_title": "版本說明",
         "notes": [
+            ("版本 1.1.0", "2026 年 11 月", "為你的照片產生佈局，每張照片都完整顯示、不裁切；智慧裁切用 Vision 在你的 Mac 上找到人臉和主體並保持在畫面裡；照片解析度不夠輸出尺寸時會有提示。"),
             ("版本 1.0.0", "2026 年 11 月", "首次發佈：200 多個可拖移邊框的佈局、形狀相框和自由排列；每張照片的裁切、濾鏡和調整；文字、貼紙和背景；社群媒體、列印和自訂尺寸；輸出 PNG、JPEG 和 HEIC；四種語言。"),
         ],
         "contact_title": "聯絡",

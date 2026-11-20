@@ -2317,6 +2317,28 @@
         }
       }
     },
+    "Every photo whole, without cropping. Click again for another arrangement.": {
+      "localizations": {
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every photo whole, without cropping. Click again for another arrangement."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每张照片都完整显示，不裁剪。再点一次换一种排法。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每張照片都完整顯示，不裁切。再按一次換一種排法。"
+          }
+        }
+      }
+    },
     "Export": {
       "localizations": {
         "en-GB": {
@@ -2559,6 +2581,28 @@
         }
       }
     },
+    "Fit Layout to Photos": {
+      "localizations": {
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fit Layout to Photos"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按照片生成布局"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "依照片產生佈局"
+          }
+        }
+      }
+    },
     "Fit in Window": {
       "localizations": {
         "en-GB": {
@@ -2665,6 +2709,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "字體"
+          }
+        }
+      }
+    },
+    "For Your Photos": {
+      "localizations": {
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For Your Photos"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "为你的照片"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "為你的照片"
           }
         }
       }
@@ -3307,6 +3373,28 @@
         }
       }
     },
+    "Layout for your photos": {
+      "localizations": {
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout for your photos"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "为你的照片生成的布局"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "為你的照片產生的佈局"
+          }
+        }
+      }
+    },
     "Layouts": {
       "localizations": {
         "en-GB": {
@@ -3479,6 +3567,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "長邊"
+          }
+        }
+      }
+    },
+    "Low resolution for this size": {
+      "localizations": {
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Low resolution for this size"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这个尺寸下分辨率偏低"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這個尺寸下解析度偏低"
           }
         }
       }

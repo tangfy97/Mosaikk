@@ -2,6 +2,14 @@
 
 All notable changes to Mosaikk are listed here. Versions follow [Semantic Versioning](https://semver.org).
 
+## [1.1.0] - 2026-11-19
+
+Layouts and crops that adapt to your photos.
+
+- **A layout made for your photos.** The first tile in Layouts arranges every photo so it shows whole, without cropping: portrait, landscape and square photos each keep their own shape. Click it again for another arrangement, or choose Collage › Fit Layout to Photos (⌥⌘F).
+- **Smart crop.** When a photo is added, Mosaikk finds faces, or else the subject, with Apple's Vision framework on your Mac, and keeps them in view however the cell is shaped. Dragging or zooming the photo takes over; Reset Crop goes back.
+- **Resolution check.** Cells whose photo would be enlarged too much for the canvas size get an orange mark, and the inspector says so, before you export or print.
+
 ## [1.0.0] - 2026-11-12
 
 The first release, rebuilt from scratch as Mosaikk (previously the unreleased Collage Atelier).

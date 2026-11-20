@@ -58,6 +58,9 @@ struct MosaikkCommands: Commands {
             Button("Shuffle Photos") { editor?.change("Shuffle") { $0.shuffle() } }
                 .keyboardShortcut("r", modifiers: [.command, .option])
             Button("Make All Cells Even") { editor?.change("Even Out Cells") { $0.evenOut() } }
+            Button("Fit Layout to Photos") { editor?.fitLayout() }
+                .keyboardShortcut("f", modifiers: [.command, .option])
+                .disabled((editor?.collage.assets.count ?? 0) < 1)
             Divider()
             Button("Split Side by Side") { editor?.splitSelected(.row) }
                 .disabled(editor?.selectedCell == nil)

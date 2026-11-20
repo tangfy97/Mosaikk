@@ -2,6 +2,7 @@ import CoreGraphics
 import Foundation
 import ImageIO
 import UniformTypeIdentifiers
+import Vision
 
 /// Reading pictures with ImageIO: checking them when they are added, and decoding them at the size needed.
 public enum ImageFiles {
@@ -29,7 +30,37 @@ public enum ImageFiles {
         let ext = type?.preferredFilenameExtension ?? (name as NSString).pathExtension.lowercased()
         let title = ((name as NSString).deletingPathExtension as String).isEmpty ? name : (name as NSString).deletingPathExtension
         return Asset(name: String(title.prefix(200)), pixelWidth: turned ? height : width, pixelHeight: turned ? width : height,
-                     fileExtension: String(ext.filter { $0.isLetter || $0.isNumber }.prefix(16)))
+                     fileExtension: String(ext.filter { $0.isLetter || $0.isNumber }.prefix(16)),
+                     focus: decode(data, maxPixels: 640).flatMap(focus(of:)))
+    }
+
+    /// Where to keep a photo's crop centred, found on the Mac with Vision: the faces if there are any, otherwise
+    /// the most salient region. From 0 to 1 across the upright picture, y down. Nil when nothing stands out.
+    public static func focus(of image: CGImage) -> CGPoint? {
+        let handler = VNImageRequestHandler(cgImage: image, options: [:])
+        let faces = VNDetectFaceRectanglesRequest()
+        let saliency = VNGenerateAttentionBasedSaliencyImageRequest()
+        try? handler.perform([faces, saliency])
+        // Vision's coordinates run from the bottom left.
+        func flipped(_ r: CGRect) -> CGRect { CGRect(x: r.minX, y: 1 - r.maxY, width: r.width, height: r.height) }
+        if let found = faces.results, !found.isEmpty {
+            // Larger faces count more, so a crowd in the background doesn't pull the crop away from the subject.
+            var x = 0.0, y = 0.0, weight = 0.0
+            for face in found {
+                let box = flipped(face.boundingBox)
+                let w = Double(box.width * box.height)
+                x += Double(box.midX) * w
+                y += Double(box.midY) * w
+                weight += w
+            }
+            if weight > 0 { return CGPoint(x: x / weight, y: y / weight) }
+        }
+        if let observation = saliency.results?.first, let objects = observation.salientObjects, !objects.isEmpty {
+            let union = objects.map { flipped($0.boundingBox) }.reduce(CGRect.null) { $0.union($1) }
+            // A subject filling most of the picture gives no useful direction.
+            if union.width * union.height < 0.8 { return CGPoint(x: union.midX, y: union.midY) }
+        }
+        return nil
     }
 
     /// Decodes a picture upright, with its longest side at most `maxPixels`.

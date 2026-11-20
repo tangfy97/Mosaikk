@@ -125,10 +125,11 @@ public struct Painter {
     }
 
     func drawPhoto(_ fill: PhotoFill?, in path: CGPath, frame: CGRect, context: CGContext) {
-        guard let fill, let asset = collage.asset(fill.asset) else {
+        guard let chosen = fill, let asset = collage.asset(chosen.asset) else {
             if let emptyFrame { emptyFrame(context, path, frame) }
             return
         }
+        let fill = chosen.effective(for: asset, in: frame)
         let placement = Self.placement(fill, aspect: asset.aspect, in: frame)
         let pixels = ImageFiles.bucket(max(placement.size.width, placement.size.height) * deviceScale,
                                        full: max(asset.pixelWidth, asset.pixelHeight))

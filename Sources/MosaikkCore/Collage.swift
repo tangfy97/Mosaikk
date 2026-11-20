@@ -217,6 +217,33 @@ public struct PhotoFill: Codable, Hashable, Sendable {
         return p
     }
 
+    /// Whether the user has chosen the crop. Until then the crop follows the photo's focus point.
+    public var hasManualCrop: Bool { zoom != 1 || offsetX != 0 || offsetY != 0 }
+
+    /// The crop actually used in `frame`: the user's, or one centred on the photo's focus point, so faces and
+    /// subjects stay in view when cells change shape.
+    public func effective(for asset: Asset, in frame: CGRect) -> PhotoFill {
+        guard !hasManualCrop, var focus = asset.focus else { return self }
+        // Follow the photo as it is drawn: flipped first, then turned clockwise.
+        if flipH { focus.x = 1 - focus.x }
+        if flipV { focus.y = 1 - focus.y }
+        for _ in 0..<quarterTurns { focus = CGPoint(x: 1 - focus.y, y: focus.x) }
+        var fill = self
+        let size = Painter.placement(self, aspect: asset.aspect, in: frame).size
+        let slackX = size.width - frame.width, slackY = size.height - frame.height
+        if slackX > 0.5 { fill.offsetX = ((focus.x - 0.5) * size.width * 2 / slackX).clamped(-1...1) }
+        if slackY > 0.5 { fill.offsetY = ((focus.y - 0.5) * size.height * 2 / slackY).clamped(-1...1) }
+        return fill
+    }
+
+    /// How much the photo is enlarged beyond its own pixels when drawn in `frame` on a canvas exported at
+    /// `exportScale` (pixels per canvas unit). Above about 1.5 it starts to look soft.
+    public func enlargement(for asset: Asset, in frame: CGRect, exportScale: Double = 1) -> Double {
+        let size = Painter.placement(self, aspect: asset.aspect, in: frame).size
+        let drawn = max(size.width, size.height) * exportScale
+        return drawn / Double(max(asset.pixelWidth, asset.pixelHeight))
+    }
+
     /// Keeps the crop when moving to a frame of a different shape.
     public func resetCrop() -> PhotoFill {
         var p = self
@@ -309,13 +336,25 @@ public struct Asset: Codable, Identifiable, Hashable, Sendable {
     public var pixelHeight: Int
     /// The original file's extension, used to name it inside the document.
     public var fileExtension: String
+    /// The point to keep in view when the photo is cropped: faces, or else the subject, found on the Mac with Vision.
+    /// From 0 to 1 across the upright picture, y down. Absent in collages made before Mosaikk 1.1.
+    public var focusX: Double?
+    public var focusY: Double?
 
-    public init(id: UUID = UUID(), name: String, pixelWidth: Int, pixelHeight: Int, fileExtension: String) {
+    public init(id: UUID = UUID(), name: String, pixelWidth: Int, pixelHeight: Int, fileExtension: String,
+                focus: CGPoint? = nil) {
         self.id = id
         self.name = name
         self.pixelWidth = pixelWidth
         self.pixelHeight = pixelHeight
         self.fileExtension = fileExtension
+        focusX = focus.map { Double($0.x) }
+        focusY = focus.map { Double($0.y) }
+    }
+
+    public var focus: CGPoint? {
+        guard let focusX, let focusY, focusX.isFinite, focusY.isFinite else { return nil }
+        return CGPoint(x: focusX.clamped(0...1), y: focusY.clamped(0...1))
     }
 
     public var aspect: Double { Double(pixelWidth) / Double(pixelHeight) }
